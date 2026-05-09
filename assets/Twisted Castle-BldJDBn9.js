@@ -1,0 +1,1 @@
+var e=`data:text/markdown;base64,SW4gdGhlIFtbV2hpc3BlcmluZyBXb29kc11dCgpXYXMgb25jZSBhIGtlZXAgZm9yIFtbQWVsb3IncyBQYXJ0eV1d`;export{e as default};
