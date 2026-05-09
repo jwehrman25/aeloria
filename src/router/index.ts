@@ -1,8 +1,45 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHashHistory,
+  type RouteRecordRaw
+} from 'vue-router'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [],
+import MarkdownPage from '../components/MarkdownPage.vue'
+
+// eagerly import all markdown
+const markdownModules = import.meta.glob(
+  '../docs/**/*.md',
+  {
+    eager: true,
+    query: '?raw',
+    import: 'default'
+  }
+)
+
+const routes: RouteRecordRaw[] = Object.keys(markdownModules).map((file) => {
+  const path = '/' + file
+    .split('/')
+    .pop()!
+    .replace('.md', '')
+  
+  return {
+    path,
+    component: MarkdownPage,
+    meta: {
+      filePath: file.replace('../docs', '')
+      .replace('.md', '')
+      .replace('/index', '')
+    }
+  }
 })
 
-export default router
+
+routes.push({
+  path: '/',
+  redirect: '/intro'
+})
+
+export default createRouter({
+  history: createWebHashHistory(),
+  routes
+})
