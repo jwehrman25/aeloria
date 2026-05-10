@@ -40,3 +40,4 @@ __screenshots__/
 package-lock.json
 
 src/docs/*
+sync-docs.ps1

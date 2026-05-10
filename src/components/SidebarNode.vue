@@ -7,7 +7,7 @@
     </div>
 
     <div v-else>
-      <strong class="clickable" @click="toggleHide()">{{ node.name }}{{ hideChildren ? '-' : '⌄' }}</strong>
+      <strong class="clickable" @click="toggleHide()">{{ node.name.replaceAll('_', ' ') }}{{ hideChildren ? '-' : '⌄' }}</strong>
     </div>
 
     <div v-if="node.children.length && !hideChildren" class="children">
