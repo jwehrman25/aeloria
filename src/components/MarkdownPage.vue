@@ -1,4 +1,5 @@
 <template>
+  <h1>{{ route.path?.toString().replaceAll('_', ' ').replace('/', '') }}</h1>
   <div v-html="html" @click="onClick"></div>
 </template>
 
@@ -10,6 +11,7 @@ import { useRoute,useRouter } from 'vue-router'
 const route = useRoute();
 const router = useRouter();
 const md = useMdRender();
+
 
 const markdownModules = import.meta.glob(
   '../docs/**/*.md',
