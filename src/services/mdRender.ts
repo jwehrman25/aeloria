@@ -16,7 +16,7 @@ export function useMdRender() {
     const parsedForLinks = cutOffDMNotes(content).replace(
       /\[\[([^[\]]+)\]\]/g,
       (_, pageName: string) => {
-        const slug = encodeURIComponent(pageName);
+        const slug = pageName.replaceAll(' ', '_');
 
         return `[${pageName}](#/${slug})`;
       },
@@ -26,9 +26,6 @@ export function useMdRender() {
 
     render = render.replace(/\n/g, '<br/>');
 
-
-    console.log(content, render);
-
     return render;
   }
 
@@ -36,3 +33,7 @@ export function useMdRender() {
     render,
   };
 }
+
+// <RouterLink :to="node.name">
+//   {{ node.name }}
+// </RouterLink>

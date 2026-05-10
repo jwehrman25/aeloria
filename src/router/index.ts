@@ -21,6 +21,7 @@ const routes: RouteRecordRaw[] = Object.keys(markdownModules).map((file) => {
     .split('/')
     .pop()!
     .replace('.md', '')
+    .replaceAll(' ', '_')
   
   return {
     path,

@@ -1,10 +1,15 @@
+<template>
+  <div v-html="html" @click="onClick"></div>
+</template>
+
 <script setup lang="ts">
 import { useMdRender } from '@/services/mdRender'
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 
-const route = useRoute()
-const md = useMdRender()
+const route = useRoute();
+const router = useRouter();
+const md = useMdRender();
 
 const markdownModules = import.meta.glob(
   '../docs/**/*.md',
@@ -35,8 +40,29 @@ const html = computed(() => {
   return render
 })
 
+function onClick(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+
+  if (target.tagName !== 'A') return;
+
+  const anchor = target as HTMLAnchorElement;
+
+  const href = anchor.getAttribute('href');
+
+  if (!href) return;
+
+  // internal wiki links
+  if (href.startsWith('#/')) {
+    event.preventDefault();
+
+    router.push(
+      decodeURIComponent(href.replace('#', ''))
+    );
+  }
+}
+
 </script>
 
-<template>
-  <div v-html="html"></div>
-</template>
+<style lang="sass" scoped>
+
+</style>

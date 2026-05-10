@@ -5,7 +5,7 @@
     <button class="btn sidebar-btn" :class="!hideSidebar ? 'sideoffeset' : ''" @click="toggleHide()">
       {{!hideSidebar ? "<<" : ">>"}}
     </button>
-    <main>
+    <main class="page">
       <router-view />
     </main>
   </div>
@@ -26,10 +26,16 @@ function toggleHide(){
 <style lang="sass">
 .layout 
   display: flex
+  height: 100vh
+  overflow: hidden
 
 main 
   flex: 1
   padding: 1rem
+
+.page
+  overflow-x: wrap
+  overflow-y: scroll
 
 .sidebar-btn
   position: relative
@@ -37,6 +43,6 @@ main
   height: 38px
 
 .sideoffeset
-  transform: translateX(-48px)
+  transform: translateX(-64px)
 
 </style>

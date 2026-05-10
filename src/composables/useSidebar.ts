@@ -10,6 +10,7 @@ export function useSidebar() {
       .replace('../docs', '')
       .replace('.md', '')
       .replace('/index', '')
+      .replaceAll(' ', '_')
 
     const name =
       path

@@ -2,7 +2,7 @@
   <div class="node">
     <div v-if="node.path">
       <RouterLink :to="node.name">
-        {{ node.name }}
+        {{ node.name.replaceAll('_', ' ') }}
       </RouterLink>
     </div>
 
@@ -25,7 +25,7 @@ import { ref } from 'vue';
 import type { DocNode } from '../types/docs'
 import { RouterLink } from 'vue-router'
 
-defineProps<{
+const props = defineProps<{
   node: DocNode
 }>()
 

@@ -21,5 +21,8 @@ const { tree } = useSidebar()
   padding: 1rem
   border-right: 1px #8b8b8b60 solid
   background-color: #b4ddd5ff
+  height: 100%
+  overflow-y: scroll
+  overflow-x: wrap
 
 </style>
