@@ -1,9 +1,9 @@
 
 <template>
   <div class="layout">
-    <Sidebar v-if="!hideSidebar"/>
-    <button class="btn sidebar-btn" :class="!hideSidebar ? 'sideoffeset' : ''" @click="toggleHide()">
-      {{!hideSidebar ? "<<" : ">>"}}
+    <Sidebar v-if="!appStore.hideSidebar"/>
+    <button class="btn sidebar-btn" :class="!appStore.hideSidebar ? 'sideoffeset' : ''" @click="appStore.toggleHide()">
+      {{!appStore.hideSidebar ? "<<" : ">>"}}
     </button>
     <main class="page">
       <router-view />
@@ -12,14 +12,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import Sidebar from './components/Sidebar.vue'
+import { useAppStore } from './stores/appStore';
+import { onMounted } from 'vue';
 
-const hideSidebar = ref(false);
+const appStore = useAppStore();
 
-function toggleHide(){
-  hideSidebar.value = !hideSidebar.value
-}
+const handleResize = () => {
+  appStore.setMobile(window.screen.width < 800);
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
 
 </script>
 

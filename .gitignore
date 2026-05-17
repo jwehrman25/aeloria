@@ -41,3 +41,5 @@ package-lock.json
 
 src/docs/*
 sync-docs.ps1
+deploy.bat
+deploy.sh

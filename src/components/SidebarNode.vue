@@ -1,7 +1,7 @@
 <template>
   <div class="node">
     <div v-if="node.path">
-      <RouterLink :to="node.name">
+      <RouterLink :to="node.name" @click="appStore.toggleHide()">
         {{ node.name.replaceAll('_', ' ') }}
       </RouterLink>
     </div>
@@ -24,6 +24,9 @@
 import { ref } from 'vue';
 import type { DocNode } from '../types/docs'
 import { RouterLink } from 'vue-router'
+import { useAppStore } from '@/stores/appStore';
+
+const appStore = useAppStore();
 
 const props = defineProps<{
   node: DocNode

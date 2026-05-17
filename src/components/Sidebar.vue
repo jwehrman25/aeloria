@@ -1,5 +1,5 @@
 <template>
-  <nav class="sidebar">
+  <nav class="sidebar" :class="appStore.isMobile ? 'mobile' : 'desktop'">
     <input type="text" placeholder="search" v-model="treeFilter"/>
     <SidebarNode
       v-for="node in filteredTree"
@@ -14,6 +14,9 @@ import { computed, ref } from 'vue';
 import { useSidebar } from '../composables/useSidebar'
 import SidebarNode from './SidebarNode.vue'
 import type { DocNode } from '@/types/docs';
+import { useAppStore } from '@/stores/appStore';
+
+const appStore = useAppStore();
 
 const { tree } = useSidebar()
 
@@ -53,12 +56,17 @@ function filterTree(tree: DocNode[]): DocNode[] {
 
 <style lang="sass" scoped>
 .sidebar
-  width: 280px
   padding: 1rem
   border-right: 1px #8b8b8b60 solid
   background-color: #b4ddd5ff
   height: 100%
   overflow-y: scroll
   overflow-x: wrap
+
+.mobile
+  width: 100vw !important
+
+.desktop
+  width: 300px
 
 </style>
